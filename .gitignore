@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Output (optional - uncomment if you don't want to track output)
+# output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
