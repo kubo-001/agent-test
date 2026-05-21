@@ -17,8 +17,8 @@ build/
 .env
 .env.local
 
-# Output (optional - uncomment if you don't want to track output)
-# output/
+# Output
+output/
 
 # OS
 .DS_Store
