@@ -7,25 +7,29 @@ user-invocable: true
 
 # 多Agent测试用例生成系统
 
-> 蚁群仿生架构 + Review循环：Lead分析 → Generator编写 → Reviewer审查 → 修复迭代 → 最终交付
+> 蚁群仿生架构 + Review循环：Lead分析 → **PM确认（如需）** → Generator编写 → Reviewer审查 → 修复迭代 → 最终交付
 
 ---
 
 ## 核心流程：Review循环
 
 ```
-需求文档 → Lead分析 → Generator并行 → Reviewer审查
-                                      ↓
-                               有问题?
-                              ↓是↓  ↓否
-                           修复迭代  最终交付
-                              ↓
-                         再次Review
-                              ↓
-                         循环直到通过（最多3轮）
+需求文档 → Lead分析
+              ↓
+     【强制】发现至少5个待确认项
+              ↓
+        PM沟通确认
+              ↓
+           确认完成 → 启动Generator并行
+                          ↓
+                      Reviewer审查
+                          ↓
+                    [修复迭代] → 最终交付
 ```
 
 **关键特性**：
+- **【强制】Lead分析后必须发现至少5个待确认项**
+- Lead发现待确认项 → PM介入沟通 → 用户确认后继续
 - 审查发现问题 → 自动进入修复迭代
 - 最多3轮迭代，第2轮达标可提前结束
 - 无Critical问题且覆盖率达标 → 最终交付
@@ -45,10 +49,21 @@ user-invocable: true
    - `.md` → 直接使用，无需转换
 3. 读取转换后的需求文档
 4. 分析需求，识别功能点
-5. 构建功能点清单
-6. 将功能点分组分配给Generator
+5. **【强制】发现并列出至少5个待确认项**
+6. 调用PM与用户沟通确认
+7. 将功能点分组分配给Generator
 
-**输出**: `features.md`
+**待确认项类别（至少选5类）**：
+- 需求模糊 - 功能描述不清晰、术语未定义
+- 边界条件 - 最大/最小数量限制、超时时间
+- 技术风险 - 实现方案不确定性、依赖外部系统
+- 影响范围 - 对现有功能的影响、兼容性
+- 优先级 - 功能点优先级排序
+- 用户体验 - 交互细节、UI表现
+- 数据边界 - 数据量预估、性能指标
+- 兼容性 - 多端兼容、版本兼容
+
+**输出**: `features.md`, `待确认项清单`
 
 ---
 
@@ -138,7 +153,7 @@ final: 最终交付（已去重）
 ├── review_report.md         # 审查报告
 ├── review_report_final.md   # 最终审查报告
 ├── iteration_log.md         # 迭代日志
-└── {需求名称}.xlsx          # Excel格式测试用例
+└── {需求名称}.xlsx          # Excel格式测试用例（与MD同目录）
 ```
 
 ---
@@ -148,6 +163,7 @@ final: 最终交付（已去重）
 | 文件 | 路径 |
 |------|------|
 | Lead执行逻辑 | `workflow/lead-execute.md` |
+| PM执行逻辑 | `workflow/pm-execute.md` |
 | Generator执行逻辑 | `workflow/generator-execute.md` |
 | Generator修复逻辑 | `workflow/generator-fix-execute.md` |
 | Reviewer执行逻辑 | `workflow/reviewer-execute.md` |

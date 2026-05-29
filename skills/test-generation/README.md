@@ -79,7 +79,7 @@ test-generation/
     ├── review_report.md          # 审查报告（最新版）
     ├── review_report_final.md    # 最终审查报告
     ├── iteration_log.md         # 迭代日志
-    └── {需求名称}.xlsx           # Excel格式测试用例（必须生成）
+    └── {需求名称}.xlsx           # Excel格式测试用例（必须生成，与MD同目录）
 ```
 
 **去重机制**：合并v1/v2/v3版本时，每个TC编号只保留最新版本（编号最大的）。

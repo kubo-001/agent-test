@@ -13,9 +13,9 @@ def convert_md_to_excel(input_path, output_dir=None):
         input_path: 输入的markdown文件路径
         output_dir: 输出目录，默认为 `output/` 目录
     """
-    # 如果未指定输出目录，默认使用 output/
+    # 如果未指定输出目录，默认输出到输入markdown文件所在目录（时间戳文件夹）
     if output_dir is None:
-        # 从输入路径提取需求名称，构建 output/需求名称.xlsx 路径
+        # 从输入路径提取需求名称，输出到输入文件所在目录
         # 路径格式: .../{需求名称}_YYYY-MM-DD_HHmmss/test_cases_final.md
         input_dir = os.path.dirname(input_path)
         folder_name = os.path.basename(input_dir)  # 例如: 【阿虎医考App】v9.3.6 - POP付费资料_2026-05-14_100000
@@ -27,9 +27,9 @@ def convert_md_to_excel(input_path, output_dir=None):
         else:
             requirement_name = folder_name
 
-        # Excel输出到 output/ 目录
-        output_dir = 'output'
-        # 确保output目录存在
+        # Excel输出到输入markdown文件所在目录（时间戳文件夹）
+        output_dir = input_dir
+        # 确保目录存在
         os.makedirs(output_dir, exist_ok=True)
         # Excel文件名 = 需求名称.xlsx
         excel_filename = f'{requirement_name}.xlsx'
